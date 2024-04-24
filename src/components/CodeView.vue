@@ -34,6 +34,10 @@ const tabList = reactive([
   { label: 'JS', value: 'JS' }
 ])
 
+const tabClick = (item) => {
+  currentTab.value = item.label
+}
+
 let htmlCode = null
 let styleCode = null
 let jsCode = null
@@ -58,11 +62,6 @@ nextTick(() => {
   })
 })
 
-const tabClick = (item) => {
-  currentTab.value = item.label
-  console.log(currentTab.value, 'currentTab.value')
-}
-
 const getValue = () => {
   return {
     htmlCode: htmlCode.state.doc.toString(),
@@ -78,6 +77,7 @@ defineExpose({
 
 <style scoped lang="scss">
 .code {
+  width: 100%;
   .tabs {
     height: 40px;
     .tab-pane {
