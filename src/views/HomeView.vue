@@ -28,7 +28,7 @@ const runClick = () => {
   const codeValue = codeRef.value.getValue()
   previewRef.value.setValue({
     htmlCode: codeValue.htmlCode,
-    cssCode: codeValue.cssCode,
+    styleCode: codeValue.styleCode,
     jsCode: codeValue.jsCode
   })
 }
