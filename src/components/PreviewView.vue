@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { ref, defineExpose } from 'vue'
 
-const iframeRef = ref('iframeRef')
+const iframeRef = ref()
 const htmlCode = ref()
 const styleCode = ref()
 const jsCode = ref()
@@ -49,20 +49,31 @@ const createIframe = () => {
   </html>`)
 }
 
+const errorEvent = (message: any, source: any, lineno: any, colno: any, error: any) => {
+// emit('error-log', event)
+  console.log(message, source, lineno, colno, error)
+}
+
 const setValue = (code: any) => {
   iframeRef.value.contentDocument.close()
   htmlCode.value = code.htmlCode
   styleCode.value = code.styleCode
   jsCode.value = code.jsCode
   createIframe()
+  iframeRef.value.contentDocument.onerror = errorEvent
 }
 
 defineExpose({
-  setValue
+  setValue,
+  errorEvent
 })
 </script>
 
 <style scoped>
+.preview {
+  width: 100%;
+  height: 100%;
+}
 iframe {
   height: 100%;
   width: 100%;;

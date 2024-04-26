@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="console-view">
     ConsoleView
   </div>
 </template>
@@ -10,6 +10,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.console-view {
+  height: 100%;
+  width: 100%;
+}
 </style>
