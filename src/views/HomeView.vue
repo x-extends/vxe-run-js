@@ -14,7 +14,7 @@
         <div
           class="perview"
           ref="perviewRef">
-          <PreviewView ref="previewViewRef"/>
+          <PreviewView ref="previewViewRef" @errorLog="errorLog" />
           <div class="flod" v-if="isFlod"></div>
         </div>
         <div
@@ -104,6 +104,11 @@ const handMouseup = () => {
 const codeRef = ref()
 const previewViewRef = ref()
 const consoleViewRef = ref()
+
+const errorLog = (event: any) => {
+  console.log(event, ';;;;;')
+  consoleViewRef.value.setConsoleMessage(event.message)
+}
 
 const runClick = () => {
   const codeValue = codeRef.value.getValue()

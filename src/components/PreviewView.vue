@@ -1,16 +1,17 @@
 <template>
   <div class="preview">
-    <iframe frameborder="0" ref="iframeRef"></iframe>
+    <iframe frameborder="0" ref="iframeRef" class="iframe" onerror=""></iframe>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, defineExpose } from 'vue'
+import { ref, defineExpose, defineEmits, nextTick } from 'vue'
 
 const iframeRef = ref()
 const htmlCode = ref()
 const styleCode = ref()
 const jsCode = ref()
+const consoleOutput = ref('')
 
 const createLink = (value:string) => {
   return '<link rel="stylesheet"' + 'href=' + value + '>'
@@ -47,25 +48,33 @@ const createIframe = () => {
         ${loadSrcipt(jsCode.value)}
     </body>
   </html>`)
+  iframeRef.value.contentWindow.onerror = errorEvent
+  iframeRef.value.contentWindow.console.log = (...args: any) => {
+    consoleOutput.value += args.join(' ') + '\n'
+  }
 }
 
+const emit = defineEmits(['errorLog'])
 const errorEvent = (message: any, source: any, lineno: any, colno: any, error: any) => {
-// emit('error-log', event)
-  console.log(message, source, lineno, colno, error)
+  emit('errorLog', {
+    message,
+    source,
+    lineno,
+    colno,
+    error
+  })
 }
 
 const setValue = (code: any) => {
-  iframeRef.value.contentDocument.close()
+  iframeRef.value.contentDocument.write('')
   htmlCode.value = code.htmlCode
   styleCode.value = code.styleCode
   jsCode.value = code.jsCode
   createIframe()
-  iframeRef.value.contentDocument.onerror = errorEvent
 }
 
 defineExpose({
-  setValue,
-  errorEvent
+  setValue
 })
 </script>
 

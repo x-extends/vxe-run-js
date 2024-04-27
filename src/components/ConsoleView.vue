@@ -1,13 +1,22 @@
 <template>
   <div class="console-view">
-    ConsoleView
+    {{ consoleMessage }}
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts" setup>
+import { defineExpose, ref } from 'vue'
 
+const consoleMessage = ref('')
+
+const setConsoleMessage = (message: string) => {
+  consoleMessage.value = message
+  console.log(message, 'message')
 }
+
+defineExpose({
+  setConsoleMessage
+})
 </script>
 
 <style scoped>
