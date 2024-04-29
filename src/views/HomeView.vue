@@ -1,26 +1,20 @@
 <template>
-  <div class="home" @mousemove="handleMouseMove" @mouseup="handMouseup">
+  <div class="home">
     <header>
       <span @click="runClick">运行</span>
     </header>
     <main>
-      <div
-        class="code"
-        ref="codeViewRef"
-        @mousedown="handleMouseDown">
+      <div class="code">
         <CodeView style="width: 100%" ref="codeRef" />
+        <MoveBar :elementView="codeView" direction='x' @changeElement="changeElement" />
       </div>
       <div class="per-con">
-        <div
-          class="perview"
-          ref="perviewRef">
-          <PreviewView ref="previewViewRef"/>
+        <div class="perview">
+          <PreviewView ref="previewViewRef" @errorLog="errorLog" />
           <div class="flod" v-if="isFlod"></div>
+          <MoveBar :elementView="perview" direction='y' @changeElement="changeElementY"  />
         </div>
-        <div
-          class="console"
-          ref="consoleRef"
-          @mousedown="consoleMouseDown">
+        <div class="console">
           <ConsoleView ref="consoleViewRef"/>
         </div>
       </div>
@@ -29,81 +23,36 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 import CodeView from '@/components/CodeView.vue'
 import PreviewView from '@/components/PreviewView.vue'
 import ConsoleView from '@/components/ConsoleView.vue'
+import MoveBar from '@/components/MoveBar.vue'
 
-const codeViewRef = ref()
-const perviewRef = ref()
-const consoleRef = ref()
-let mousePosition = null
-let codeWidth = null
-const movePosition = ref()
-const isMove = ref()
+const codeView = ref()
+const perview = ref()
 const isFlod = ref(false)
 
-// 鼠标经过修改样式
-const handleMouseMove = ($el: any) => {
-  mousePosition = $el.clientX
-  codeWidth = codeViewRef.value.clientWidth
+const changeElement = (message: string) => {
   const code = document.querySelector('.code')
-  isMove.value = codeWidth - mousePosition <= 4
-  if (isMove.value) {
-    code.style.cursor = 'move'
-  } else {
-    code.style.cursor = 'defalue'
-  }
+  code.style.width = message
+  isFlod.value = true
 }
 
-// 鼠标点击
-const handleMouseDown = ($el: any) => {
-  const code = document.querySelector('.code')
-  const codeWidth = codeViewRef.value.clientWidth
-  const currentX = $el.clientX
-  if (isMove.value) {
-    document.onmousemove = (event) => {
-      isFlod.value = true
-      code.style.cursor = 'move'
-      movePosition.value = event.clientX
-      const moveX = event.clientX - currentX
-      code.style.width = codeWidth + moveX + 'px'
-    }
-  }
-}
-
-const consoleMouseDown = ($el: any) => {
-  const cons = document.querySelector('.console')
+const changeElementY = (message: string) => {
   const perview = document.querySelector('.perview')
-  const consoleHeight = consoleRef.value.clientHeight
-  const perviewHeight = perviewRef.value.clientHeight
-  const currentY = $el.clientY
-  if (isMove.value) {
-    document.onmousemove = (event) => {
-      isFlod.value = true
-      cons.style.cursor = 'move'
-      movePosition.value = event.clientX
-      const moveY = event.clientY - currentY
-      cons.style.height = consoleHeight - moveY + 'px'
-      perview.style.height = perviewHeight + moveY + 'px'
-      console.log(cons.style.height, 'move')
-    }
-  }
-}
-
-// 鼠标弹起
-const handMouseup = () => {
-  isFlod.value = false
-  document.onmousemove = null
-  const code = document.querySelector('.code')
-  // code.style.width = movePosition.value + 'px'
-  code.style.cursor = 'default'
+  perview.style.height = message
+  isFlod.value = true
 }
 
 const codeRef = ref()
 const previewViewRef = ref()
 const consoleViewRef = ref()
+
+const errorLog = (event: any) => {
+  consoleViewRef.value.setConsoleMessage(event.message)
+}
 
 const runClick = () => {
   const codeValue = codeRef.value.getValue()
@@ -113,6 +62,11 @@ const runClick = () => {
     jsCode: codeValue.jsCode
   })
 }
+
+onMounted(() => {
+  codeView.value = document.querySelector('.code')
+  perview.value = document.querySelector('.perview')
+})
 </script>
 
 <style scoped lang="scss">
@@ -134,6 +88,7 @@ const runClick = () => {
       width: 50%;
       min-width: 20%;
       height: 100%;
+      position: relative;
     }
     .per-con {
       flex: 1;
@@ -147,18 +102,18 @@ const runClick = () => {
         min-height: 30%;
         max-height: 90%;
         position: relative;
+        position: relative;
         .flod {
           width: 100%;
           height: 100%;
           position: absolute;
           top: 0;
           left: 0;
-          background-color: #000;
         }
       }
       .console {
         flex: 1;
-        background-color: #928c8c;
+        background-color: #eeeeee;
       }
     }
   }
