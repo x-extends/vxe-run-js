@@ -1,22 +1,104 @@
 <template>
-  <div>
-    <div ref="editRef"></div>
+  <div class="code">
+    <div class="tabs">
+      <span
+        :class="['tab-pane', currentTab === item.value ? 'active' : '']"
+        v-for="(item, index) in tabList"
+        :key="index"
+        @click="tabClick(item)">
+        {{ item.label }}
+      </span>
+    </div>
+    <div v-show="currentTab === 'HTML'" class="code-view" ref="htmlEditRef"></div>
+    <div v-show="currentTab === 'CSS'" class="code-view" ref="cssEditRef"></div>
+    <div v-show="currentTab === 'JS'" class="code-view" ref="jsEditRef"></div>
   </div>
 </template>
 
 <script setup>
-import { nextTick, ref } from 'vue'
+import { nextTick, ref, defineExpose, reactive } from 'vue'
 import { basicSetup, EditorView } from 'codemirror'
+import { html } from '@codemirror/lang-html'
+import { css } from '@codemirror/lang-css'
 import { javascript } from '@codemirror/lang-javascript'
+// import { oneDark } from '@codemirror/theme-one-dark'
 
-const editRef = ref()
+const htmlEditRef = ref()
+const cssEditRef = ref()
+const jsEditRef = ref()
+
+const currentTab = ref('HTML')
+const tabList = reactive([
+  { label: 'HTML', value: 'HTML' },
+  { label: 'CSS', value: 'CSS' },
+  { label: 'JS', value: 'JS' }
+])
+
+const tabClick = (item) => {
+  currentTab.value = item.label
+}
+
+let htmlCode = null
+let styleCode = null
+let jsCode = null
 
 nextTick(() => {
-  // eslint-disable-next-line no-unused-vars
-  const a = new EditorView({
-    doc: "console.log('hello')\n",
+  htmlCode = new EditorView({
+    doc: '',
+    extensions: [basicSetup, html()],
+    parent: htmlEditRef.value
+  })
+
+  styleCode = new EditorView({
+    doc: '',
+    extensions: [basicSetup, css()],
+    parent: cssEditRef.value
+  })
+
+  jsCode = new EditorView({
+    doc: '',
     extensions: [basicSetup, javascript()],
-    parent: editRef.value
+    parent: jsEditRef.value
   })
 })
+
+const getValue = () => {
+  return {
+    htmlCode: htmlCode.state.doc.toString(),
+    styleCode: styleCode.state.doc.toString(),
+    jsCode: jsCode.state.doc.toString()
+  }
+}
+
+defineExpose({
+  getValue
+})
 </script>
+
+<style scoped lang="scss">
+.code {
+  width: 100%;
+  height: 100%;
+  .tabs {
+    height: 40px;
+    .tab-pane {
+      width: 80px;
+      text-align: center;
+      line-height: 40px;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .active {
+      background-color: #f3f5f6;
+      box-shadow: 0px -2px 0px rgba($color: #000000, $alpha: .2);
+    }
+  }
+  .code-view {
+    overflow-y: scroll;
+    height: calc(100% - 48px);
+    width: 100%;
+    background-color: #f3f5f6;
+  }
+}
+</style>
