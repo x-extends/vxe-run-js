@@ -78,6 +78,7 @@ defineExpose({
 <style scoped lang="scss">
 .code {
   width: 100%;
+  height: 100%;
   .tabs {
     height: 40px;
     .tab-pane {
@@ -94,6 +95,7 @@ defineExpose({
     }
   }
   .code-view {
+    overflow-y: scroll;
     height: calc(100% - 48px);
     width: 100%;
     background-color: #f3f5f6;

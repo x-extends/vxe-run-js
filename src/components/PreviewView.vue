@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineExpose, defineEmits, nextTick } from 'vue'
+import { ref, defineExpose, defineEmits } from 'vue'
 
 const iframeRef = ref()
 const htmlCode = ref()
