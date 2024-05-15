@@ -1,24 +1,31 @@
-# vxe-table-run-demo
+# vxe-run-demo
 
-## Project setup
-```
-npm install
+## Run
+
+## Installation dependency
+
+```shell
+npm run update
 ```
 
-### Compiles and hot-reloads for development
-```
+### Run serve
+
+```shell
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
+### Compile and pack
+
+```shell
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Contributors
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Thank you to everyone who contributed to this project.
+
+[![Alternate text](https://contrib.rocks/image?repo=x-extends/vxe-table-run-demo)](https://github.com/x-extends/vxe-table-run-demo/graphs/contributors)
+
+## License
+
+[MIT](LICENSE) © 2019-present, Xu Liangzhan
