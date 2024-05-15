@@ -1,9 +1,9 @@
 <template>
-  <div class="home">
-    <header>
-      <span @click="runClick">运行</span>
-    </header>
-    <main>
+  <div class="vxe-run-edit-view">
+    <div class="vxe-run-edit-header">
+      <VxeButton status="primary" @click="runClick">运行</VxeButton>
+    </div>
+    <div class="vxe-run-edit-body">
       <div class="code">
         <CodeView style="width: 100%" ref="codeRef" />
         <MoveBar :elementView="codeView" direction='x' @changeElement="changeElement" />
@@ -18,7 +18,7 @@
           <ConsoleView ref="consoleViewRef"/>
         </div>
       </div>
-    </main>
+    </div>
   </div>
 </template>
 
@@ -69,52 +69,57 @@ onMounted(() => {
 })
 </script>
 
-<style scoped lang="scss">
-.home {
+<style lang="scss" scoped>
+.vxe-run-edit-view {
+  display: flex;
+  flex-direction: column;
+  position: relative;
   height: 100%;
   width: 100%;
-  header {
-    width: 100%;
-    height: 40px;
-    padding: 2px 8px 2px 8px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+  background-color: #fff;
+}
+.vxe-run-edit-header {
+  width: 100%;
+  padding: 2px 8px 2px 8px;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  border-bottom: 1px solid #e2e2e3;
+  cursor: pointer;
+}
+.vxe-run-edit-body {
+  flex-grow: 1;
+  display: flex;
+  overflow: hidden;
+  .code {
+    width: 50%;
+    min-width: 20%;
+    height: 100%;
+    position: relative;
   }
-  main {
-    height: calc(100% - 40px);
+  .per-con {
+    flex: 1;
+    height: 100%;
+    position: relative;
     display: flex;
-    .code {
-      width: 50%;
-      min-width: 20%;
-      height: 100%;
-      position: relative;
-    }
-    .per-con {
-      flex: 1;
-      height: 100%;
-      position: relative;
-      display: flex;
-      flex-direction: column;
+    flex-direction: column;
 
-      .perview {
-        height: 70%;
-        min-height: 30%;
-        max-height: 90%;
-        position: relative;
-        position: relative;
-        .flod {
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-        }
+    .perview {
+      height: 70%;
+      min-height: 30%;
+      max-height: 90%;
+      position: relative;
+      position: relative;
+      .flod {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
       }
-      .console {
-        flex: 1;
-        background-color: #eeeeee;
-      }
+    }
+    .console {
+      flex: 1;
     }
   }
 }

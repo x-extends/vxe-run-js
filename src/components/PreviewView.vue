@@ -1,5 +1,5 @@
 <template>
-  <div class="preview">
+  <div class="vxe-run-edit-preview">
     <iframe frameborder="0" ref="iframeRef" class="iframe" onerror=""></iframe>
   </div>
 </template>
@@ -80,9 +80,10 @@ defineExpose({
 </script>
 
 <style scoped>
-.preview {
+.vxe-run-edit-preview {
   width: 100%;
   height: 100%;
+  border-bottom: 1px solid #e2e2e3;
 }
 iframe {
   height: 100%;

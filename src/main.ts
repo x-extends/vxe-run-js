@@ -1,6 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import '@/assets/style.css'
+import store from './store'
+import VxeUI from 'vxe-pc-ui'
 
-createApp(App).use(router).mount('#app')
+import '@/assets/style.scss'
+import 'vxe-pc-ui/lib/style.css'
+
+createApp(App).use(router).use(store).use(VxeUI).mount('#app')

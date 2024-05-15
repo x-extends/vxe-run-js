@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
+import EditView from '@/views/EditView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'HomeView',
-    component: HomeView
+    redirect: {
+      name: 'EditView'
+    }
+  },
+  {
+    path: '/edit',
+    name: 'EditView',
+    component: EditView
   }
 ]
 

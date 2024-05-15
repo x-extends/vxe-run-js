@@ -33,7 +33,7 @@ const barActive = ref(false)
 
 const handleMouseMove = (className: string) => {
   const moveBar = document.querySelector(className)
-  moveBar.style.cursor = 'move'
+  moveBar.style.cursor = props.direction === 'y' ? 'n-resize' : 'e-resize'
   barActive.value = true
 }
 

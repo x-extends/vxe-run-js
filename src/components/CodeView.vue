@@ -1,22 +1,21 @@
 <template>
-  <div class="code">
-    <div class="tabs">
-      <span
-        :class="['tab-pane', currentTab === item.value ? 'active' : '']"
-        v-for="(item, index) in tabList"
-        :key="index"
-        @click="tabClick(item)">
-        {{ item.label }}
-      </span>
-    </div>
-    <div v-show="currentTab === 'HTML'" class="code-view" ref="htmlEditRef"></div>
-    <div v-show="currentTab === 'CSS'" class="code-view" ref="cssEditRef"></div>
-    <div v-show="currentTab === 'JS'" class="code-view" ref="jsEditRef"></div>
+  <div class="vxe-run-edit-code">
+    <VxeTabs v-model="currentTab" type="border-card" @load="loadTabEvent">
+      <VxeTabPane title="HTML" name="HTML">
+        <div class="code-view" ref="htmlEditRef"></div>
+      </VxeTabPane>
+      <VxeTabPane title="CSS" name="CSS">
+        <div class="code-view" ref="cssEditRef"></div>
+      </VxeTabPane>
+      <VxeTabPane title="JS" name="JS">
+        <div class="code-view" ref="jsEditRef"></div>
+      </VxeTabPane>
+    </VxeTabs>
   </div>
 </template>
 
 <script setup>
-import { nextTick, ref, defineExpose, reactive } from 'vue'
+import { nextTick, ref, defineExpose, reactive, onMounted } from 'vue'
 import { basicSetup, EditorView } from 'codemirror'
 import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'
@@ -28,39 +27,38 @@ const cssEditRef = ref()
 const jsEditRef = ref()
 
 const currentTab = ref('HTML')
-const tabList = reactive([
-  { label: 'HTML', value: 'HTML' },
-  { label: 'CSS', value: 'CSS' },
-  { label: 'JS', value: 'JS' }
-])
-
-const tabClick = (item) => {
-  currentTab.value = item.label
-}
 
 let htmlCode = null
 let styleCode = null
 let jsCode = null
 
-nextTick(() => {
-  htmlCode = new EditorView({
-    doc: '',
-    extensions: [basicSetup, html()],
-    parent: htmlEditRef.value
+const loadTabEvent = () => {
+  nextTick(() => {
+    switch (currentTab.value) {
+      case 'HTML':
+        htmlCode = new EditorView({
+          doc: '',
+          extensions: [basicSetup, html()],
+          parent: htmlEditRef.value
+        })
+        break
+      case 'CSS':
+        styleCode = new EditorView({
+          doc: '',
+          extensions: [basicSetup, css()],
+          parent: cssEditRef.value
+        })
+        break
+      case 'JS':
+        jsCode = new EditorView({
+          doc: '',
+          extensions: [basicSetup, javascript()],
+          parent: jsEditRef.value
+        })
+        break
+    }
   })
-
-  styleCode = new EditorView({
-    doc: '',
-    extensions: [basicSetup, css()],
-    parent: cssEditRef.value
-  })
-
-  jsCode = new EditorView({
-    doc: '',
-    extensions: [basicSetup, javascript()],
-    parent: jsEditRef.value
-  })
-})
+}
 
 const getValue = () => {
   return {
@@ -70,33 +68,23 @@ const getValue = () => {
   }
 }
 
+onMounted(() => {
+  loadTabEvent()
+})
+
 defineExpose({
   getValue
 })
 </script>
 
 <style scoped lang="scss">
-.code {
+.vxe-run-edit-code {
   width: 100%;
   height: 100%;
-  .tabs {
-    height: 40px;
-    .tab-pane {
-      width: 80px;
-      text-align: center;
-      line-height: 40px;
-      display: inline-block;
-      cursor: pointer;
-    }
-
-    .active {
-      background-color: #f3f5f6;
-      box-shadow: 0px -2px 0px rgba($color: #000000, $alpha: .2);
-    }
-  }
+  border-right: 1px solid #e2e2e3;
   .code-view {
     overflow-y: scroll;
-    height: calc(100% - 48px);
+    height: 100%;
     width: 100%;
     background-color: #f3f5f6;
   }

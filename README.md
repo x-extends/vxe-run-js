@@ -1,4 +1,4 @@
-# vxe-run-demo
+# vxe-run-js
 
 ## Run
 
@@ -24,7 +24,7 @@ npm run build
 
 Thank you to everyone who contributed to this project.
 
-[![Alternate text](https://contrib.rocks/image?repo=x-extends/vxe-table-run-demo)](https://github.com/x-extends/vxe-table-run-demo/graphs/contributors)
+[![vxe-run-js](https://contrib.rocks/image?repo=x-extends/vxe-run-js)](https://github.com/x-extends/vxe-run-js/graphs/contributors)
 
 ## License
 
