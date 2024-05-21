@@ -4,15 +4,15 @@
       <VxeButton status="primary" @click="runClick">运行</VxeButton>
     </div>
     <div class="vxe-run-edit-body">
-      <div class="code">
+      <div ref="codeElemRef" class="code">
         <CodeView style="width: 100%" ref="codeRef" />
-        <MoveBar :elementView="codeView" direction='x' @changeElement="changeElement" />
+        <MoveBar :elementView="codeElemRef" direction='x' @changeElement="changeElement" />
       </div>
       <div class="per-con">
-        <div class="perview">
+        <div ref="previewRef" class="preview">
           <PreviewView ref="previewViewRef" @errorLog="errorLog" />
           <div class="flod" v-if="isFlod"></div>
-          <MoveBar :elementView="perview" direction='y' @changeElement="changeElementY"  />
+          <MoveBar :elementView="previewViewRef" direction='y' @changeElement="changeElementY"  />
         </div>
         <div class="console">
           <ConsoleView ref="consoleViewRef"/>
@@ -23,27 +23,31 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
 import CodeView from '@/components/CodeView.vue'
 import PreviewView from '@/components/PreviewView.vue'
 import ConsoleView from '@/components/ConsoleView.vue'
 import MoveBar from '@/components/MoveBar.vue'
 
-const codeView = ref()
-const perview = ref()
+const codeElemRef = ref<HTMLDivElement>()
+const previewElemRef = ref<HTMLDivElement>()
 const isFlod = ref(false)
 
 const changeElement = (message: string) => {
-  const code = document.querySelector('.code')
-  code.style.width = message
-  isFlod.value = true
+  const codeEl = codeElemRef.value
+  if (codeEl) {
+    codeEl.style.width = message
+    isFlod.value = true
+  }
 }
 
 const changeElementY = (message: string) => {
-  const perview = document.querySelector('.perview')
-  perview.style.height = message
-  isFlod.value = true
+  const previewEl = previewElemRef.value
+  if (previewEl) {
+    previewEl.style.height = message
+    isFlod.value = true
+  }
 }
 
 const codeRef = ref()
@@ -62,11 +66,6 @@ const runClick = () => {
     jsCode: codeValue.jsCode
   })
 }
-
-onMounted(() => {
-  codeView.value = document.querySelector('.code')
-  perview.value = document.querySelector('.perview')
-})
 </script>
 
 <style lang="scss" scoped>
@@ -104,7 +103,7 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
 
-    .perview {
+    .preview {
       height: 70%;
       min-height: 30%;
       max-height: 90%;

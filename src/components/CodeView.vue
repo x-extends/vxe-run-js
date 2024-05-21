@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { nextTick, ref, defineExpose, reactive, onMounted } from 'vue'
+import { nextTick, ref, defineExpose, onMounted } from 'vue'
 import { basicSetup, EditorView } from 'codemirror'
 import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'
@@ -62,9 +62,9 @@ const loadTabEvent = () => {
 
 const getValue = () => {
   return {
-    htmlCode: htmlCode.state.doc.toString(),
-    styleCode: styleCode.state.doc.toString(),
-    jsCode: jsCode.state.doc.toString()
+    htmlCode: htmlCode ? htmlCode.state.doc.toString() : '',
+    styleCode: styleCode ? styleCode.state.doc.toString() : '',
+    jsCode: jsCode ? jsCode.state.doc.toString() : ''
   }
 }
 
