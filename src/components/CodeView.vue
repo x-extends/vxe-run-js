@@ -1,6 +1,6 @@
 <template>
   <div class="vxe-run-edit-code">
-    <VxeTabs v-model="currentTab" type="border-card" @load="loadTabEvent">
+    <VxeTabs class="vxe-run-edit-code-tabs" v-model="currentTab" type="border-card" @tab-load="loadTabEvent">
       <VxeTabPane title="HTML" name="HTML">
         <div class="code-view" ref="htmlEditRef"></div>
       </VxeTabPane>
@@ -88,5 +88,8 @@ defineExpose({
     width: 100%;
     background-color: #f3f5f6;
   }
+}
+.vxe-run-edit-code-tabs {
+  height: 100%;
 }
 </style>

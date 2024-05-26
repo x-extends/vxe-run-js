@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { VxeUI } from 'vxe-pc-ui'
 
-const currTheme = localStorage.getItem('VXE_THEME') as 'dark' | 'default' || 'default'
+const currTheme = localStorage.getItem('VXE_THEME') as 'dark' | 'light'
 
 VxeUI.setTheme(currTheme)
 
@@ -12,12 +12,12 @@ export const useAppStore = defineStore('app', {
     return {
       theme: currTheme,
       serveTY: new Date().getFullYear(),
-      baseApiUrl: process.env.VUE_APP_MAIN_URL
+      siteBaseUrl: process.env.VUE_APP_SITE_BASE_URL
     }
   },
   actions: {
-    setTheme (name: any) {
-      this.theme = name || 'default'
+    setTheme (name: 'dark' | 'light') {
+      this.theme = name || 'light'
       VxeUI.setTheme(name)
       document.documentElement.setAttribute('vxe-run-theme', name)
       localStorage.setItem('VXE_THEME', name)

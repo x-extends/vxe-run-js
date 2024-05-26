@@ -1,9 +1,13 @@
 <template>
-  <div class="vxe-run-page-footer">
-    <a class="link" href="http://beian.miit.gov.cn/" target="_blank">粤ICP备2022010374号-1</a>
+  <div class="page-footer">
+    <VxeLink href="http://beian.miit.gov.cn/" target="_blank" content="粤ICP备2022010374号-2">
+      <template #icon>
+        <img src="/badge.png" style="height: 14px;padding-bottom: 0.2em;">
+      </template>
+    </VxeLink>
     <span style="margin-left: 20px;">
       <span>©</span>
-      <span><a class="link" :href="baseApiUrl" target="_blank">vxe-table</a> 2018-{{serveTY}}</span>
+      <span><VxeLink status="primary" :href="siteBaseUrl" target="_blank">vxe-ui</VxeLink> 2018-{{serveTY}}</span>
     </span>
   </div>
 </template>
@@ -13,18 +17,13 @@ import { computed } from 'vue'
 import { useAppStore } from '@/store/app'
 
 const appStore = useAppStore()
-
 const serveTY = computed(() => appStore.serveTY)
-const baseApiUrl = computed(() => appStore.baseApiUrl)
+const siteBaseUrl = computed(() => appStore.siteBaseUrl)
 </script>
 
-<style lang="scss" scoped>
-.vxe-run-page-footer {
-  border-top: 1px solid #e2e2e3;
-  padding: 8px 0;
-  font-size: 12px;
-  .link {
-    color: #000;
-  }
+<style lang="scss">
+.page-footer {
+  width: calc(100% - 300px);
+  text-align: center;
 }
 </style>

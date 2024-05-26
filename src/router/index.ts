@@ -1,22 +1,22 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import EditView from '@/views/EditView.vue'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import RunEditView from '@/views/RunEditView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     redirect: {
-      name: 'EditView'
+      name: 'RunEditView'
     }
   },
   {
     path: '/edit',
-    name: 'EditView',
-    component: EditView
+    name: 'RunEditView',
+    component: RunEditView
   }
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes
 })
 
