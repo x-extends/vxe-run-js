@@ -9,12 +9,13 @@
         <MoveBar :elementView="codeElemRef" direction='x' @changeElement="changeElement" />
       </div>
       <div class="per-con">
-        <div ref="previewRef" class="preview">
+        <div ref="previewElemRef" class="preview">
           <PreviewView ref="previewViewRef" @errorLog="errorLog" />
           <div class="flod" v-if="isFlod"></div>
-          <MoveBar :elementView="previewViewRef" direction='y' @changeElement="changeElementY"  />
+          <MoveBar :elementView="previewElemRef" direction='y' @changeElement="changeElementY"  />
         </div>
         <div class="console">
+          <ConsoleHead />
           <ConsoleView ref="consoleViewRef"/>
         </div>
       </div>
@@ -29,6 +30,7 @@ import CodeView from '@/components/CodeView.vue'
 import PreviewView from '@/components/PreviewView.vue'
 import ConsoleView from '@/components/ConsoleView.vue'
 import MoveBar from '@/components/MoveBar.vue'
+import ConsoleHead from '@/components/ConsoleHead.vue'
 
 const codeElemRef = ref<HTMLDivElement>()
 const previewElemRef = ref<HTMLDivElement>()
@@ -53,7 +55,6 @@ const changeElementY = (message: string) => {
 const codeRef = ref()
 const previewViewRef = ref()
 const consoleViewRef = ref()
-
 const errorLog = (event: any) => {
   consoleViewRef.value.setConsoleMessage(event.message)
 }

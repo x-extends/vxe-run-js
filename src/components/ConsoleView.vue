@@ -1,5 +1,6 @@
 <template>
   <div class="console-view">
+    <div class=""></div>
     {{ consoleMessage }}
   </div>
 </template>

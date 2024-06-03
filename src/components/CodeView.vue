@@ -89,7 +89,8 @@ defineExpose({
     background-color: #f3f5f6;
   }
 }
-.vxe-run-edit-code-tabs {
+.vxe-run-edit-code-tabs,
+.vxe-run-edit-code-tabs ::v-deep .cm-editor {
   height: 100%;
 }
 </style>

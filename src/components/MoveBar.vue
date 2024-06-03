@@ -49,21 +49,18 @@ const handleMouseDown = ($el: any) => {
   const elementHeight = props.elementView.clientHeight
   const currentX = $el.clientX
   const currentY = $el.clientY
-  if (props.direction === 'x') {
-    document.onmousemove = (event) => {
-      let changeResult = null
+  console.log(elementWidth, 'elementWidth')
+  console.log(elementHeight, 'elementHeight')
+  document.onmousemove = (event) => {
+    let changeResult = null
+    if (props.direction === 'x') {
       const moveX = event.clientX - currentX
       changeResult = elementWidth + moveX + 'px'
-      emit('changeElement', changeResult)
-    }
-  }
-  if (props.direction === 'y') {
-    document.onmousemove = (event) => {
-      let changeResult = null
+    } else if (props.direction === 'y') {
       const moveY = event.clientY - currentY
       changeResult = elementHeight + moveY + 'px'
-      emit('changeElement', changeResult)
     }
+    emit('changeElement', changeResult)
   }
 }
 
