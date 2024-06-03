@@ -15,7 +15,7 @@
           <MoveBar :elementView="previewElemRef" direction='y' @changeElement="changeElementY"  />
         </div>
         <div class="console">
-          <ConsoleHead />
+          <ConsoleHead @clear="consoleClear" />
           <ConsoleView ref="consoleViewRef"/>
         </div>
       </div>
@@ -57,6 +57,9 @@ const previewViewRef = ref()
 const consoleViewRef = ref()
 const errorLog = (event: any) => {
   consoleViewRef.value.setConsoleMessage(event.message)
+}
+const consoleClear = () => {
+  consoleViewRef.value.setConsoleMessage('')
 }
 
 const runClick = () => {

@@ -1,6 +1,5 @@
 <template>
   <div class="console-view">
-    <div class=""></div>
     {{ consoleMessage }}
   </div>
 </template>
@@ -12,7 +11,6 @@ const consoleMessage = ref('')
 
 const setConsoleMessage = (message: string) => {
   consoleMessage.value = message
-  console.log(message, 'message')
 }
 
 defineExpose({
