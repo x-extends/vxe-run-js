@@ -4,18 +4,18 @@
       <VxeTabPane title="HTML" name="HTML">
         <div class="code-view" ref="htmlEditRef"></div>
       </VxeTabPane>
-      <VxeTabPane title="CSS" name="CSS">
-        <div class="code-view" ref="cssEditRef"></div>
-      </VxeTabPane>
       <VxeTabPane title="JS" name="JS">
         <div class="code-view" ref="jsEditRef"></div>
+      </VxeTabPane>
+      <VxeTabPane title="CSS" name="CSS">
+        <div class="code-view" ref="cssEditRef"></div>
       </VxeTabPane>
     </VxeTabs>
   </div>
 </template>
 
 <script setup>
-import { nextTick, ref, defineExpose, onMounted } from 'vue'
+import { nextTick, ref, onMounted } from 'vue'
 import { basicSetup, EditorView } from 'codemirror'
 import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'

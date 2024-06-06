@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineExpose, ref } from 'vue'
+import { ref } from 'vue'
 
 const consoleMessage = ref('')
 

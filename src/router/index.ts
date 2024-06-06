@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import RunEditView from '@/views/RunEditView.vue'
+import RunEditView from '@/views/edit/RunEditView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
