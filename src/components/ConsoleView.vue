@@ -11,7 +11,6 @@ const consoleMessage = ref('')
 
 const setConsoleMessage = (message: string) => {
   consoleMessage.value = message
-  console.log(message, 'message')
 }
 
 defineExpose({
