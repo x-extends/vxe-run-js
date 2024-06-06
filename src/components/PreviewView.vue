@@ -67,7 +67,13 @@ const errorEvent = (message: any, source: any, lineno: any, colno: any, error: a
 }
 
 const setValue = (code: any) => {
-  iframeRef.value.contentDocument.write('')
+  if (iframeRef.value.contentDocument && iframeRef.value.contentDocument.body) {
+    iframeRef.value.contentDocument.body.innerHTML = ''
+  } else if (iframeRef.value.contentWindow) {
+    iframeRef.value.onload = () => {
+      iframeRef.value.contentWindow.document.body.innerHTML = ''
+    }
+  }
   htmlCode.value = code.htmlCode
   styleCode.value = code.styleCode
   jsCode.value = code.jsCode
