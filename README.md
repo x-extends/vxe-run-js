@@ -1,5 +1,12 @@
 # Vxe Run
 
+## 说明
+
+* 运行 js 代码
+  * 传参数 scriptUrl=xx&htmlUrl=xx&cssUrl=xx
+* 运行 vue 代码
+  * 传参数 vueSetupUrl=xx
+
 ## Run
 
 ## Installation dependency
