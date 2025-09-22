@@ -37,13 +37,15 @@ const createIframe = () => {
   iframeRef.value.contentDocument.write(`
   <html>
     <head>
-        ${createLink('https://cdn.jsdelivr.net/npm/vxe-table/lib/style.css')}
+        ${createLink('https://cdn.jsdelivr.net/npm/vxe-pc-ui@4.2.20/lib/style.css')}
+        ${createLink('https://cdn.jsdelivr.net/npm/vxe-table@4.7.87/lib/style.css')}
         ${loadStyle(styleCode.value)}
     </head>
     <body>
-        ${createScript('https://cdn.jsdelivr.net/npm/vue')}
+        ${createScript('https://cdn.jsdelivr.net/npm/vue@3.4.27')}
         ${createScript('https://cdn.jsdelivr.net/npm/xe-utils')}
-        ${createScript('https://cdn.jsdelivr.net/npm/vxe-table')}
+        ${createScript('https://cdn.jsdelivr.net/npm/vxe-pc-ui@4.2.20')}
+        ${createScript('https://cdn.jsdelivr.net/npm/vxe-table@4.7.87')}
         ${loadHtml(htmlCode.value)}
         ${loadSrcipt(jsCode.value)}
     </body>

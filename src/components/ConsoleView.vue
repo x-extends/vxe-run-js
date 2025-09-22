@@ -1,6 +1,12 @@
 <template>
   <div class="console-view">
-    {{ consoleMessage }}
+    <div class="console-view-head">
+      <span>Console</span>
+      <span>清空</span>
+    </div>
+    <div class="console-view-body">
+      {{ consoleMessage }}
+    </div>
   </div>
 </template>
 

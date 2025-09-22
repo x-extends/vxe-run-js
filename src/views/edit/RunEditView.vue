@@ -1,65 +1,40 @@
 <template>
   <div class="vxe-run-edit-view">
     <div class="vxe-run-edit-header">
-      <VxeButton status="primary" @click="runClick">运行</VxeButton>
+      <vxe-button status="primary" @click="runClick">运行</vxe-button>
     </div>
     <div class="vxe-run-edit-body">
-      <div ref="codeElemRef" class="code">
-        <CodeView style="width: 100%" ref="codeRef" />
-        <MoveBar :elementView="codeElemRef" direction='x' @changeElement="changeElement" />
-      </div>
-      <div class="per-con">
-        <div ref="previewElemRef" class="preview">
-          <PreviewView ref="previewViewRef" @errorLog="errorLog" />
-          <div class="flod" v-if="isFlod"></div>
-          <MoveBar :elementView="previewElemRef" direction='y' @changeElement="changeElementY"  />
-        </div>
-        <div class="console">
-          <ConsoleHead @clear="consoleClear" />
-          <ConsoleView ref="consoleViewRef"/>
-        </div>
-      </div>
+      <vxe-split>
+        <vxe-split-pane width="800">
+          <CodeView ref="codeRef" />
+        </vxe-split-pane>
+        <vxe-split-pane>
+          <vxe-split vertical>
+            <vxe-split-pane>
+              <PreviewView ref="previewViewRef" @errorLog="errorLog" />
+            </vxe-split-pane>
+            <vxe-split-pane>
+              <ConsoleView ref="consoleViewRef"/>
+            </vxe-split-pane>
+          </vxe-split>
+        </vxe-split-pane>
+      </vxe-split>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-
 import CodeView from '@/components/CodeView.vue'
 import PreviewView from '@/components/PreviewView.vue'
 import ConsoleView from '@/components/ConsoleView.vue'
-import MoveBar from '@/components/MoveBar.vue'
-import ConsoleHead from '@/components/ConsoleHead.vue'
-
-const codeElemRef = ref<HTMLDivElement>()
-const previewElemRef = ref<HTMLDivElement>()
-const isFlod = ref(false)
-
-const changeElement = (message: string) => {
-  const codeEl = codeElemRef.value
-  if (codeEl) {
-    codeEl.style.width = message
-    isFlod.value = true
-  }
-}
-
-const changeElementY = (message: string) => {
-  const previewEl = previewElemRef.value
-  if (previewEl) {
-    previewEl.style.height = message
-    isFlod.value = true
-  }
-}
 
 const codeRef = ref()
 const previewViewRef = ref()
 const consoleViewRef = ref()
+
 const errorLog = (event: any) => {
   consoleViewRef.value.setConsoleMessage(event.message)
-}
-const consoleClear = () => {
-  consoleViewRef.value.setConsoleMessage('')
 }
 
 const runClick = () => {
@@ -94,36 +69,5 @@ const runClick = () => {
   flex-grow: 1;
   display: flex;
   overflow: hidden;
-  .code {
-    width: 50%;
-    min-width: 20%;
-    height: 100%;
-    position: relative;
-  }
-  .per-con {
-    flex: 1;
-    height: 100%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-
-    .preview {
-      height: 70%;
-      min-height: 30%;
-      max-height: 90%;
-      position: relative;
-      position: relative;
-      .flod {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-    }
-    .console {
-      flex: 1;
-    }
-  }
 }
 </style>

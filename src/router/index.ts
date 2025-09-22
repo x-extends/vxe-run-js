@@ -12,6 +12,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/edit',
     name: 'RunEditView',
     component: RunEditView
+  },
+  {
+    path: '/edit/v4',
+    name: 'RunEditView',
+    component: RunEditView
   }
 ]
 
