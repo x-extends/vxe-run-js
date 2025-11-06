@@ -4,21 +4,21 @@
       <vxe-button status="primary" @click="runClick">运行</vxe-button>
     </div>
     <div class="vxe-run-edit-body">
-      <vxe-split>
-        <vxe-split-pane width="800">
+      <vxe-splitter>
+        <vxe-splitter-panel width="800" min-width="160">
           <CodeView ref="codeRef" />
-        </vxe-split-pane>
-        <vxe-split-pane>
-          <vxe-split vertical>
-            <vxe-split-pane>
+        </vxe-splitter-panel>
+        <vxe-splitter-panel min-width="100">
+          <vxe-splitter vertical>
+            <vxe-splitter-panel  min-height="100">
               <PreviewView ref="previewViewRef" @errorLog="errorLog" />
-            </vxe-split-pane>
-            <vxe-split-pane>
+            </vxe-splitter-panel>
+            <vxe-splitter-panel min-height="100">
               <ConsoleView ref="consoleViewRef"/>
-            </vxe-split-pane>
-          </vxe-split>
-        </vxe-split-pane>
-      </vxe-split>
+            </vxe-splitter-panel>
+          </vxe-splitter>
+        </vxe-splitter-panel>
+      </vxe-splitter>
     </div>
   </div>
 </template>
