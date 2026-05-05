@@ -2,7 +2,7 @@
   <div class="page-footer">
     <vxe-link href="http://beian.miit.gov.cn/" target="_blank" content="粤ICP备2022010374号-2">
       <template #icon>
-        <img src="/badge.png" style="height: 14px;padding-bottom: 0.2em;">
+        <img :src="`${resBaseUrl}/badge.png`" style="height: 14px;padding-bottom: 0.2em;">
       </template>
     </vxe-link>
     <span style="margin-left: 20px;">
@@ -18,12 +18,12 @@ import { useAppStore } from '@/store/app'
 
 const appStore = useAppStore()
 const serveTY = computed(() => appStore.serveTY)
+const resBaseUrl = computed(() => appStore.resBaseUrl)
 const siteBaseUrl = computed(() => appStore.siteBaseUrl)
 </script>
 
 <style lang="scss">
 .page-footer {
-  width: calc(100% - 300px);
   text-align: center;
 }
 </style>

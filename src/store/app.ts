@@ -18,8 +18,9 @@ export const useAppStore = defineStore('app', {
       theme: currTheme,
       serveTY: new Date().getFullYear(),
       language: currLanguage,
-      siteBaseUrl: process.env.VUE_APP_SITE_BASE_URL,
-      cdnBaseUrl: process.env.VUE_APP_CDN_URL,
+      resBaseUrl: import.meta.env.VITE_APP_RES_URL,
+      siteBaseUrl: import.meta.env.VITE_APP_SITE_BASE_URL,
+      cdnBaseUrl: import.meta.env.VITE_APP_CDN_URL,
       vxeVersion: 'v4'
     }
   },
