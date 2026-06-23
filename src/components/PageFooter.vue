@@ -1,6 +1,6 @@
 <template>
   <div class="page-footer">
-    <vxe-link href="http://beian.miit.gov.cn/" target="_blank" content="粤ICP备2022010374号-2">
+    <vxe-link href="http://beian.miit.gov.cn/" target="_blank" :content="aqCode">
       <template #icon>
         <img :src="`${resBaseUrl}/badge.png`" style="height: 14px;padding-bottom: 0.2em;">
       </template>
@@ -20,6 +20,10 @@ const appStore = useAppStore()
 const serveTY = computed(() => appStore.serveTY)
 const resBaseUrl = computed(() => appStore.resBaseUrl)
 const siteBaseUrl = computed(() => appStore.siteBaseUrl)
+
+const aqCode = computed(() => {
+  return ''
+})
 </script>
 
 <style lang="scss">
