@@ -22,10 +22,10 @@
     "vxe-pc-ui": "4.18.20"
   },
   "devDependencies": {
-    "@types/node": "~24.12.3",
+    "@types/node": "~26.6.5",
     "@typescript-eslint/eslint-plugin": "~4.32.0",
     "@typescript-eslint/parser": "~4.32.0",
-    "@vitejs/plugin-vue": "~6.0.8",
+    "@vitejs/plugin-vue": "~6.0.10",
     "@vitejs/plugin-vue-jsx": "~5.1.6",
     "del": "~6.0.0",
     "eslint": "~7.13.0",
@@ -43,12 +43,12 @@
     "gulp-replace": "~1.1.4",
     "gulp-typescript": "~5.0.1",
     "rollup-plugin-external-globals": "~0.13.0",
-    "sass": "~1.101.7",
-    "sass-loader": "~17.0.0",
+    "sass": "~1.106.0",
+    "sass-loader": "~17.0.1",
     "typescript": "~5.9.3",
-    "vite": "~8.2.1",
+    "vite": "~8.3.4",
     "vite-plugin-html": "~3.2.2",
     "vite-plugin-zip-pack": "~1.2.4",
-    "vue-tsc": "~3.3.8"
+    "vue-tsc": "~3.3.13"
   }
 }
