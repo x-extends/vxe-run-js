@@ -5,7 +5,8 @@
   "scripts": {
     "update": "npm install --legacy-peer-deps",
     "serve": "vite",
-    "build": "vue-tsc && vite build"
+    "build": "vue-tsc && vite build",
+    "clean:all": "node scripts/clean-all"
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.16.0",
